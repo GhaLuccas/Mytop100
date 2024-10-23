@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from movies.serializers import MovieSerializer
 
 from rest_framework import generics
+from rest_framework.generics import RetrieveAPIView
 
 
 @api_view(["GET"])
@@ -23,6 +24,13 @@ def get_one_movie(request, movie_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+def delete_movie(request , movie_id):
+    movie = get_object_or_404(Movie , id=movie_id)
+    if movie:
+        movie.delete()
+        return Response(status)
+
+
 # Generics views
 
 
@@ -31,6 +39,10 @@ class GenericListAllAPI(generics.ListAPIView):
     serializer_class = MovieSerializer
     
     
-class GenericDetailAPI(generics.DeatilAPIView):
+class GenericMovieRetrieveAPI(RetrieveAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    
+class GenericDeleteMovieAPI(generics.DestroyAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
