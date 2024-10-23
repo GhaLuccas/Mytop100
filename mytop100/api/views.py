@@ -24,11 +24,20 @@ def get_one_movie(request, movie_id):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-def delete_movie(request , movie_id):
-    movie = get_object_or_404(Movie , id=movie_id)
-    if movie:
-        movie.delete()
-        return Response(status)
+@api_view(["POST"])
+def create_movie(request):
+    movie = MovieSerializer(data=request.data)
+    if movie.is_valid():
+        movie.save()
+        return Response(movie.data , status=status.HTTP_201_CREATED)
+    return Response(movie.errors , status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE']) 
+def delete_movie(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    movie.delete()
+    return Response({"message": f"Movie with id {movie_id} has been deleted successfully."}, 
+                    status=status.HTTP_200_OK)
 
 
 # Generics views
