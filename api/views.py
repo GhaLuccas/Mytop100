@@ -29,3 +29,7 @@ def get_one_movie(request, movie_id):
 class GenericListAllAPI(generics.ListAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+    
+class GenericDetailAPI(generics.DetailAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
