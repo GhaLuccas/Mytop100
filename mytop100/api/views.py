@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from movies.serializers import MovieSerializer
 
 from rest_framework import generics
-from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import RetrieveAPIView , CreateAPIView
 
 
 @api_view(["GET"])
@@ -32,6 +32,15 @@ def create_movie(request):
         return Response(movie.data , status=status.HTTP_201_CREATED)
     return Response(movie.errors , status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(["UPDATE"])
+def update_movie(request , movie_id):
+    update_movie = get_object_or_404(Movie , movie_id)
+    update_movie = MovieSerializer(data=request.data)
+    if update_movie.is_valid():
+        update_movie.save()
+        return Response(update_movie.data , status=status.HTTP_201_CREATED)
+
 @api_view(['DELETE']) 
 def delete_movie(request, movie_id):
     movie = get_object_or_404(Movie, id=movie_id)
@@ -49,6 +58,13 @@ class GenericListAllAPI(generics.ListAPIView):
     
     
 class GenericMovieRetrieveAPI(RetrieveAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    
+class GenericCreateMovieAPI(generics.CreateAPIView):
+    serializer_class = MovieSerializer
+    
+class GenericUpdateMovieAPI(generics.UpdateAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     
