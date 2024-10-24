@@ -1,7 +1,7 @@
 from . import views
 from django.urls import path
 
-urlpatterns = [
+"""urlpatterns = [
     path("movies/", views.get_all_movies, name="get_all"),
     path("movie/<int:movie_id>/", views.get_one_movie, name="get_one"),
     path("create-movie/", views.create_movie, name="create-movie"),
@@ -13,4 +13,9 @@ urlpatterns = [
     path("generic/create-movie/", views.GenericCreateMovieAPI.as_view(), name="generic_create"),
     path("generic/update-movie/<int:movie_id>/" , views.GenericUpdateMovieAPI.as_view()),
     path("generic/delete/<int:movie_id>/", views.GenericDeleteMovieAPI.as_view(), name="generic_del"),
+]"""
+
+
+urlpatterns = [
+    path("movies/", views.MovieAPIView.as_view(), name="generic"),
 ]
