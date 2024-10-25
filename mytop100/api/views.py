@@ -9,7 +9,6 @@ from rest_framework import generics
 from rest_framework.views import APIView
 
 
-
 @api_view(["GET"])
 def get_all_movies(request):
     movies = Movie.objects.all()
@@ -52,51 +51,53 @@ def delete_movie(request, movie_id):
     )
 
 
-#Class-Based Views (CBVs)
+# Class-Based Views (CBVs)
+
 
 class MovieListCreateAPIView(APIView):
 
     def get(self, request):
-        movies = Movie.objects.all()  
-        serializer = MovieSerializer(movies, many=True)  
-        return Response(serializer.data, status=status.HTTP_200_OK) 
-  
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def post(self, request):
-        movie = MovieSerializer(data=request.data)  
+        movie = MovieSerializer(data=request.data)
         if movie.is_valid():
-            movie.save()  
-            return Response(movie.data, status=status.HTTP_201_CREATED) 
+            movie.save()
+            return Response(movie.data, status=status.HTTP_201_CREATED)
         else:
-            return Response(movie.errors, status=status.HTTP_400_BAD_REQUEST)  
-        
+            return Response(movie.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class MovieRetriveDeleteUpdate(APIView):
-    
-    def get(self ,request , movie_id):
-        movie = get_object_or_404(Movie , id=movie_id)
+
+    def get(self, request, movie_id):
+        movie = get_object_or_404(Movie, id=movie_id)
         serializer = MovieSerializer(movie)
-        return Response(serializer.data , status=status.HTTP_200_OK)
-    
-    def put(self , request , movie_id):
-        updated_movie = get_object_or_404(Movie , id=movie_id)
-        serializer = MovieSerializer(updated_movie , data=request.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def put(self, request, movie_id):
+        updated_movie = get_object_or_404(Movie, id=movie_id)
+        serializer = MovieSerializer(updated_movie, data=request.data)
         if serializer.is_valid():
-            update_movie.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    def delete(self, request , movie_id):
-        movie = get_object_or_404(Movie , id=movie_id)
+
+    def delete(self, request, movie_id):
+        movie = get_object_or_404(Movie, id=movie_id)
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
 # Generics views
-"""class MovieListCreateView(generics.ListCreateAPIView):
+class GenericMovieListCreateView(generics.ListCreateAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
 
 
-class MovieDetailview(generics.RetrieveUpdateDestroyAPIView):
+class GenericMovieDetailDeleteUpdateview(generics.RetrieveUpdateDestroyAPIView):
     queryset = Movie.objects.all()
-    serializer_class = MovieSerializer"""
+    serializer_class = MovieSerializer
+    lookup_field = "pk"
