@@ -8,6 +8,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=80)
     director = models.CharField(max_length=80)
     description  = models.TextField(max_length=100)
+    score = models.IntegerField()
 
     def __str__(self):
         return self.title

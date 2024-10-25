@@ -1,12 +1,10 @@
 from movies.models import Movie, MovieList
+from movies.serializers import MovieSerializer
+from django.shortcuts import get_object_or_404
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.shortcuts import get_object_or_404
-
-from movies.serializers import MovieSerializer
-
 from rest_framework import generics
 from rest_framework.views import APIView
 
@@ -56,7 +54,7 @@ def delete_movie(request, movie_id):
 
 #Class-Based Views (CBVs)
 
-class MovieAPIView(APIView):
+class MovieListCreateAPIView(APIView):
 
     def get(self, request):
         movies = Movie.objects.all()  
@@ -70,6 +68,27 @@ class MovieAPIView(APIView):
             return Response(movie.data, status=status.HTTP_201_CREATED) 
         else:
             return Response(movie.errors, status=status.HTTP_400_BAD_REQUEST)  
+        
+class MovieRetriveDeleteUpdate(APIView):
+    
+    def retrive(self ,request , movie_id):
+        movie = get_object_or_404(Movie , id=movie_id)
+        serializer = MovieSerializer(movie)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+    
+    def update(self , request , movie_id):
+        updated_movie = get_object_or_404(Movie , id=movie_id)
+        updated_movie = MovieSerializer(Movie , data=request.data)
+        if updated_movie.is_valid():
+            update_movie.save()
+            return Response(updated_movie.data, status=status.HTTP_201_CREATED)
+        return Response(updated_movie.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request , movie_id):
+        movie = get_object_or_404(Movie , id=movie_id)
+        movie.delete()
+        return Response(status=status.HTTP_200_OK)
+
 
 
 # Generics views
