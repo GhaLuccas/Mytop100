@@ -25,3 +25,20 @@ class MovieListCreateAPIView(TestCase):
       self.assertEqual(response.status_code , 201)
         
       
+      
+class MovieRetriveDeleteUpdate(TestCase):
+  
+  def setUp(self):
+    self.movie = Movie.objects.create(title="Test Movie", director="Test Director", description="Test Description", score=10)
+    self.url_singular  = reverse("singular" , kwargs={'movie_id':self.movie.id})
+    
+    
+  def test_url_retrive(self):
+      response = self.client.get(self.url_singular)
+      print(response.data)
+      self.assertEqual(response.status_code, 200)
+      self.assertEqual(response.data['title'], "Test Movie")
+
+      
+    
+    
