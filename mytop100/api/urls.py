@@ -18,7 +18,7 @@ from django.urls import path
 
 urlpatterns = [
     path("movies/", views.MovieListCreateAPIView.as_view(), name="plural"),
-    path("movies/<int:movie_id>/" , views.MovieRetriveDeleteUpdate.as_view() ,name='singular-apis'),
+    path("movies/<int:movie_id>/" , views.MovieRetriveDeleteUpdate.as_view() ,name='singular'),
     
     
     path("movies/generics/" , views.GenericMovieListCreateView.as_view() ,name="generic-list" ) ,
