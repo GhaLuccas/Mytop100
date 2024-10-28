@@ -70,7 +70,7 @@ class MovieListCreateAPIView(APIView):
             return Response(movie.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class MovieRetriveDeleteUpdate(APIView):
+class MovieRetrieveUpdateDestroyAPIView(APIView):
 
     def get(self, request, movie_id):
         movie = get_object_or_404(Movie, id=movie_id)
