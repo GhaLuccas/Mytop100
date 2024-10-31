@@ -29,7 +29,7 @@ class MovieListCreateAPITest (APITestCase):
     def test_invalid_create_url(self):
       data = {"director": "New Director", "description": "New Description" , "score": 10}
       response = self.client.post(self.url_plural , data , format='json')
-      self.assertEqual(response.status_code , status.HTTP_404_BAD_REQUEST)
+      self.assertEqual(response.status_code , status.HTTP_400_BAD_REQUEST)
         
       
       
@@ -38,7 +38,7 @@ class MovieRetrieveDeleteUpdateTest(APITestCase):
   def setUp(self):
     self.movie = Movie.objects.create(title="Test Movie", director="Test Director", description="Test Description", score=10)
     self.url_singular  = reverse("singular" , kwargs={'movie_id':self.movie.id})
-    self.invalid_id = reverse('singular', kwargs={"movie_d":999})
+    self.invalid_id = reverse('singular', kwargs={"movie_id":999})
     self.invalid_data = { "director": "Update Director", "description": "Update Description" , "score": 10}
     
     
@@ -65,18 +65,21 @@ class MovieRetrieveDeleteUpdateTest(APITestCase):
   
   def test_invalid_put_url(self):
     response = self.client.put(self.invalid_id,self.invalid_data , format='json')
-    self.assertEqual(response.status_code , status.HTTP_404_NOT_FOUND)
+    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     
   
   
   def test_invalid_retrive_url(self):
     response = self.client.get(self.invalid_id)
-    self.assertEqual(response.status_code , status.HTTP_404_NOT_FOUND)
+    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     
     
   def test_invalid_delete_url(self):
     response = self.client.delete(self.invalid_id)
-    self.assertEqual(response.status_code , status.HTTP_404_NOT_FOUND)    
+    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    
   
       
   
