@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
 
-# Class-Based Views (CBVs)
+
 class MovieListCreateAPIView(APIView):
 
     def get(self, request):

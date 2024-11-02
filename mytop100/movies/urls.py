@@ -6,5 +6,4 @@ urlpatterns = [
     path("list/", views.my_movie_list, name="list"),  
     path('movies/add/', views.add_movie, name='add_movie'),
     path('movies/remove/<int:movie_id>/', views.remove_movie, name='remove_movie'),
-    
 ]

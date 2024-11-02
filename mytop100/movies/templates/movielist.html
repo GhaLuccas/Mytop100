@@ -1,23 +1,27 @@
-<!-- movie_list.html -->
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Minha Lista de Filmes</title>
-</head>
-<body>
-    <h1>Minha Lista de Filmes</h1>
-    <ul>
+{% extends 'home.html' %}
+
+{% block title %}Minha Lista de Filmes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Minha Lista de Filmes</h1>
+    <ul class="list-group">
         {% for movie in movie_list.movies.all %}
-            <li>
-                {{ movie.title }} - {{ movie.director }}
-                <form action="{% url 'remove_movie' movie.id %}" method="POST" style="display:inline;">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div class="movie-info">
+                    <strong>{{ movie.title }}</strong><br>
+                    <span>Diretor: {{ movie.director }}</span><br>
+                    <span class="score">Pontuação: {{ movie.score }}</span>
+                </div>
+                <form action="{% url 'remove_movie' movie.id %}" method="POST">
                     {% csrf_token %}
-                    <button type="submit">Remover</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
                 </form>
             </li>
+        {% empty %}
+            <li class="list-group-item">Nenhum filme encontrado.</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'add_movie' %}">Adicionar Filme</a> <!-- Link para adicionar filme -->
-</body>
-</html>
+    <a href="{% url 'add_movie' %}" class="btn btn-primary mt-4">Adicionar Filme</a>
+</div>
+{% endblock %}
