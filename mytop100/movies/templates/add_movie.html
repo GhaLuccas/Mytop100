@@ -1,0 +1,23 @@
+<!-- add_movie.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Filme</title>
+</head>
+<body>
+    <h1>Adicionar Filme à Sua Lista</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="movie">Escolha um filme:</label>
+        <select name="movie_id" required>
+            <option value="">Selecione um filme</option>
+            {% for movie in movies %}
+                <option value="{{ movie.id }}">{{ movie.title }} - {{ movie.director }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Adicionar</button>
+    </form>
+    <a href="{% url 'list' %}">Voltar à lista de filmes</a>
+</body>
+</html>

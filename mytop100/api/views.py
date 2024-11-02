@@ -1,5 +1,5 @@
 from movies.models import Movie, MovieList
-from movies.serializers import MovieSerializer
+from movies.serializers import MovieSerializer , MovieListSerializer
 from django.shortcuts import get_object_or_404
 
 from rest_framework.decorators import api_view
@@ -7,9 +7,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
-
-
-
 
 # Class-Based Views (CBVs)
 class MovieListCreateAPIView(APIView):
@@ -50,3 +47,9 @@ class MovieRetrieveUpdateDestroyAPIView(APIView):
 
 
 
+
+class MovieListApi(APIView):
+    def get(self ,request):
+        movie_list = get_object_or_404(MovieList , user=request.user)
+        serializer = MovieListSerializer(movie_list)
+        return Response(serializer.data , status=status.HTTP_200_OK)

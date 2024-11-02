@@ -1,0 +1,23 @@
+<!-- movie_list.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Lista de Filmes</title>
+</head>
+<body>
+    <h1>Minha Lista de Filmes</h1>
+    <ul>
+        {% for movie in movie_list.movies.all %}
+            <li>
+                {{ movie.title }} - {{ movie.director }}
+                <form action="{% url 'remove_movie' movie.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Remover</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_movie' %}">Adicionar Filme</a> <!-- Link para adicionar filme -->
+</body>
+</html>
