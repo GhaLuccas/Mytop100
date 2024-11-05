@@ -13,7 +13,7 @@
                     <span>Diretor: {{ movie.director }}</span><br>
                     <span class="score">Pontuação: {{ movie.score }}</span>
                 </div>
-                <form action="{% url 'remove_movie' movie.id %}" method="POST">
+                <form action="{% url 'movies:remove_movie' movie.id %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger btn-sm">Remover</button>
                 </form>
@@ -22,6 +22,6 @@
             <li class="list-group-item">Nenhum filme encontrado.</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'add_movie' %}" class="btn btn-primary mt-4">Adicionar Filme</a>
+    <a href="{% url 'movies:add_movie' %}" class="btn btn-primary mt-4">Adicionar Filme</a>
 </div>
 {% endblock %}

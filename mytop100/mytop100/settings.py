@@ -126,6 +126,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'login'  # URL para onde o usuário será redirecionado ao tentar acessar uma página protegida
-LOGIN_REDIRECT_URL = 'home'  # URL para onde o usuário será redirecionado após o login der certo
-LOGOUT_REDIRECT_URL = 'home'  # URL para onde o usuário será redirecionado após logout
+LOGIN_URL = 'accounts:login'  # Aponte para o login com o namespace correto do app 'accounts'
+LOGIN_REDIRECT_URL = 'movies:home'  # Redireciona para a home dentro do app 'movies'
+LOGOUT_REDIRECT_URL = 'movies:home'  # Redireciona para a home do app 'movies' após o logout
+
