@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 2rem;
+            background-color: #ffffff; /* Fundo branco */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            color: #000; /* Título em preto */
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .form-control {
+            border: 1px solid #ccc; /* Borda leve em cinza */
+            border-radius: 6px;
+        }
+        .btn-primary {
+            background-color: #007bff; /* Azul para o botão */
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9; /* Azul escuro ao passar o mouse */
+        }
+        .form-container {
+        display: grid;
+        gap: 10px;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .form-group input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
+
+    button.btn-primary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    button.btn-primary:hover {
+        background-color: #0069d9;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registro</h2>
+<form method="post" class="form-container">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_username">Username:</label>
+        {{ form.username }}
+    </div>
+    <div class="form-group">
+        <label for="id_email">Email address:</label>
+        {{ form.email }}
+    </div>
+    <div class="form-group">
+        <label for="id_password">Password:</label>
+        {{ form.password }}
+    </div>
+    <div class="form-group">
+        <label for="id_password2">Confirm Password:</label>
+        <input type="password" name="password2" id="id_password2" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</form>
+
+    </div>
+</body>
+</html>

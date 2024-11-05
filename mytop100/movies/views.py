@@ -19,6 +19,7 @@ def home(request):
   return render(request, "home.html", context)
 
 
+# this fucn get the user movie list
 def my_movie_list(request):
     movie_list = get_object_or_404(MovieList, user=request.user)
     

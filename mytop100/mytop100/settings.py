@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework" ,
     "movies" ,
     "api" ,
+    "accounts" ,
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'login'  # URL para onde o usuário será redirecionado ao tentar acessar uma página protegida
+LOGIN_REDIRECT_URL = 'home'  # URL para onde o usuário será redirecionado após o login der certo
+LOGOUT_REDIRECT_URL = 'home'  # URL para onde o usuário será redirecionado após logout
