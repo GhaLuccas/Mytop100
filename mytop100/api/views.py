@@ -7,9 +7,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
 
 
 class MovieListCreateAPIView(APIView):
+    
+    permission_classes =[IsAdminUser]
 
     def get(self, request):
         movies = Movie.objects.all()
@@ -26,6 +29,8 @@ class MovieListCreateAPIView(APIView):
 
 
 class MovieRetrieveUpdateDestroyAPIView(APIView):
+    
+    permission_classes =[IsAdminUser]
 
     def get(self, request, movie_id):
         movie = get_object_or_404(Movie, id=movie_id)
