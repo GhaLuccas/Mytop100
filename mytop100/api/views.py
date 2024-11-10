@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+import requests
 from movies.models import Movie, MovieList
 from movies.serializers import MovieSerializer , MovieListSerializer
 from django.shortcuts import get_object_or_404
@@ -58,3 +60,5 @@ class MovieListApi(APIView):
         movie_list = get_object_or_404(MovieList , user=request.user)
         serializer = MovieListSerializer(movie_list)
         return Response(serializer.data , status=status.HTTP_200_OK)
+
+
