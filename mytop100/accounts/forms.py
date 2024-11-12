@@ -7,7 +7,7 @@ class RegistroForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'password']
         widgets = {
             'username': forms.TextInput(attrs={'maxlength': 150}),
         }
