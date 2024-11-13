@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework" ,
+    'rest_framework_simplejwt',
     "movies" ,
     "api" ,
     "accounts" ,
@@ -125,3 +126,8 @@ LOGIN_URL = 'accounts:login'  # Aponte para o login com o namespace correto do a
 LOGIN_REDIRECT_URL = 'movies:home'  # Redireciona para a home dentro do app 'movies'
 LOGOUT_REDIRECT_URL = 'movies:home'  # Redireciona para a home do app 'movies' após o logout
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
