@@ -127,7 +127,11 @@ LOGIN_REDIRECT_URL = 'movies:home'  # Redireciona para a home dentro do app 'mov
 LOGOUT_REDIRECT_URL = 'movies:home'  # Redireciona para a home do app 'movies' após o logout
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT
+        'rest_framework.authentication.SessionAuthentication',        # Sessão
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # Apenas usuários autenticados
+    ],
 }
